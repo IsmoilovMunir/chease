@@ -1,23 +1,66 @@
 package com.munir;
 
+import com.munir.piece.Bishop;
+import com.munir.piece.King;
+import com.munir.piece.Knight;
 import com.munir.piece.Pawn;
 import com.munir.piece.Piece;
+import com.munir.piece.Queen;
+import com.munir.piece.Rook;
 
 import java.util.HashMap;
 
 public class Board {
     HashMap<Coordinates, Piece> pieces = new HashMap<>();
 
-    public void setPieces(Coordinates coordinates, Piece piece) {
+    public void setPiece(Coordinates coordinates, Piece piece) {
         piece.coordinate = coordinates;
         pieces.put(coordinates, piece);
     }
 
+    public boolean isSquareEmpty(Coordinates coordinates) {
+        return !pieces.containsKey(coordinates);
+    }
+
+    public Piece getPiece(Coordinates coordinates) {
+        return pieces.get(coordinates);
+    }
+
     public void setupDefaultPiecesPositions() {
         for (File file : File.values()) {
-            setPieces(new Coordinates(file, 2), new Pawn(Color.WHITE, new Coordinates(file, 2)));
-            setPieces(new Coordinates(file, 2), new Pawn(Color.BLACK, new Coordinates(file, 2)));
-
+            //set pawns
+            setPiece(new Coordinates(file, 2), new Pawn(Color.WHITE, new Coordinates(file, 2)));
+            setPiece(new Coordinates(file, 7), new Pawn(Color.BLACK, new Coordinates(file, 7)));
         }
+
+        // set rooks
+        setPiece(new Coordinates(File.A, 1), new Rook(Color.WHITE, new Coordinates(File.A, 1)));
+        setPiece(new Coordinates(File.H, 1), new Rook(Color.WHITE, new Coordinates(File.H, 1)));
+        setPiece(new Coordinates(File.A, 8), new Rook(Color.BLACK, new Coordinates(File.A, 8)));
+        setPiece(new Coordinates(File.H, 8), new Rook(Color.BLACK, new Coordinates(File.H, 8)));
+
+        // set knights
+        setPiece(new Coordinates(File.B, 1), new Knight(Color.WHITE, new Coordinates(File.B, 1)));
+        setPiece(new Coordinates(File.G, 1), new Knight(Color.WHITE, new Coordinates(File.G, 1)));
+        setPiece(new Coordinates(File.B, 8), new Knight(Color.BLACK, new Coordinates(File.B, 8)));
+        setPiece(new Coordinates(File.G, 8), new Knight(Color.BLACK, new Coordinates(File.G, 8)));
+
+        // set bishops
+        setPiece(new Coordinates(File.C, 1), new Bishop(Color.WHITE, new Coordinates(File.C, 1)));
+        setPiece(new Coordinates(File.F, 1), new Bishop(Color.WHITE, new Coordinates(File.F, 1)));
+        setPiece(new Coordinates(File.C, 8), new Bishop(Color.BLACK, new Coordinates(File.C, 8)));
+        setPiece(new Coordinates(File.F, 8), new Bishop(Color.BLACK, new Coordinates(File.F, 8)));
+
+        // set queens
+        setPiece(new Coordinates(File.D, 1), new Queen(Color.WHITE, new Coordinates(File.D, 1)));
+        setPiece(new Coordinates(File.D, 8), new Queen(Color.BLACK, new Coordinates(File.D, 8)));
+
+        // set kings
+        setPiece(new Coordinates(File.E, 1), new King(Color.WHITE, new Coordinates(File.E, 1)));
+        setPiece(new Coordinates(File.E, 8), new King(Color.BLACK, new Coordinates(File.E, 8)));
+    }
+
+    public static boolean isSquareDark(Coordinates coordinates) {
+        return ((coordinates.file.ordinal() + 1) + coordinates.rank) % 2 == 0;
     }
 }
