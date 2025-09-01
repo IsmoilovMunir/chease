@@ -4,7 +4,6 @@ import com.munir.piece.Piece;
 
 import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 public class InputCoordinates {
     private static Scanner scanner = new Scanner(System.in);
@@ -27,7 +26,6 @@ public class InputCoordinates {
                 System.out.println("Invalid format");
                 continue;
             }
-
             int rank = Character.getNumericValue(rankChar);
             if (rank < 1 || rank > 8) {
                 System.out.println("Invalid format");
@@ -74,15 +72,5 @@ public class InputCoordinates {
             }
             return input;
         }
-
-
     }
-
-//    public static void main(String[] args) {
-//        Board board = new Board();
-//        board.setupDefaultPiecesPositions();
-//
-//        Coordinates coordinates = inputPieceCoordinatesForColor(Color.WHITE, board);
-//        System.out.println(coordinates);
-//    }
 }

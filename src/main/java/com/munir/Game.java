@@ -5,7 +5,6 @@ import com.munir.piece.Piece;
 import java.util.Set;
 
 public class Game {
-
     private final Board board;
     private BoardConsoleRenderer renderer = new BoardConsoleRenderer();
 
@@ -18,10 +17,9 @@ public class Game {
         while (true) {
             //render
             renderer.render(board);
-
-            if (isWhiteToMove){
+            if (isWhiteToMove) {
                 System.out.println("White to move");
-            }else {
+            } else {
                 System.out.println("Black to move");
             }
             //input
@@ -33,9 +31,7 @@ public class Game {
             //make move
             board.movePiece(sourceCoordinates, targetCoordinates);
             //pass move
-            isWhiteToMove =!isWhiteToMove;
-
-
+            isWhiteToMove = !isWhiteToMove;
         }
     }
 }

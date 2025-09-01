@@ -16,6 +16,4 @@ public class Bishop extends Piece {
     protected Set<CoordinatesShift> getPieceMoves() {
         return Set.of();
     }
-
-
 }

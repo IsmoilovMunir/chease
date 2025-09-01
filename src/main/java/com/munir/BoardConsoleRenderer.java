@@ -15,8 +15,6 @@ public class BoardConsoleRenderer {
             for (File file : File.values()) {
                 Coordinates coordinates = new Coordinates(file, rank);
                 if (board.isSquareEmpty(coordinates)) {
-
-
                     line += getSpriteFormEmptySquare(coordinates);
                 } else {
                     line += getPieceSprite(board.getPiece(coordinates));
@@ -40,7 +38,6 @@ public class BoardConsoleRenderer {
             result = ANSI_BLACK_SQUARE_BACKGROUND + result;
         } else {
             result = ANSI_WHITE_SQUARE_BACKGROUND + result;
-
         }
         return result;
     }
@@ -53,23 +50,17 @@ public class BoardConsoleRenderer {
         switch (piece.getClass().getSimpleName()) {
             case "Pawn":
                 return "♟︎";
-
             case "Knight":
                 return "♞";
-
             case "Bishop":
                 return "♝";
-
             case "Rook":
                 return "♜";
-
             case "Queen":
                 return "♛";
-
             case "King":
                 return "♚";
         }
-
         return "";
     }
 
@@ -78,5 +69,4 @@ public class BoardConsoleRenderer {
         return colorizeSprite
                 (" " + selectUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinate));
     }
-
 }

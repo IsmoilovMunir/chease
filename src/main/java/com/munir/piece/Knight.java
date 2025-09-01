@@ -15,7 +15,6 @@ public class Knight extends Piece {
     @Override
     protected Set<CoordinatesShift> getPieceMoves() {
         return new HashSet<>(Arrays.asList(
-
                 new CoordinatesShift(1, 2),
                 new CoordinatesShift(2, 1),
 

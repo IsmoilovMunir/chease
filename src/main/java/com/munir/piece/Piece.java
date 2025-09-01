@@ -18,17 +18,14 @@ abstract public class Piece {
 
     public Set<Coordinates> getAvailableMoveSquares(Board board) {
         Set<Coordinates> result = new HashSet<>();
-
         for (CoordinatesShift shift : getPieceMoves()) {
             if (coordinate.canShift(shift)) {
                 Coordinates newCoordinates = coordinate.shift(shift);
-
                 if (isSquareAvailableForMove(newCoordinates, board)) {
                     result.add(newCoordinates);
                 }
             }
         }
-
         return result;
     }
 
@@ -37,5 +34,4 @@ abstract public class Piece {
     }
 
     protected abstract Set<CoordinatesShift> getPieceMoves();
-
 }
