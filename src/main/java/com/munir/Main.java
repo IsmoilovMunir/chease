@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 //        Board board = new Board();
 //        board.setupDefaultPiecesPositions();
-        Board board = new BoardFactory().fromFEN("8/6p1/8/5pp1/2n1N1P1/3P4/2P5/8 w HAha - 0 1");
+        Board board = new BoardFactory().fromFEN("k4r2/8/8/8/4KN2/2q1N3/8/8 w - - 0 1");
         BoardConsoleRenderer renderer = new BoardConsoleRenderer();
   //      renderer.render(board);
 //

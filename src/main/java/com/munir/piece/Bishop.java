@@ -3,7 +3,6 @@ package com.munir.piece;
 import com.munir.Color;
 import com.munir.Coordinates;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Bishop extends LongRangePiece implements IBishop {
