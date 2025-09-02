@@ -35,7 +35,7 @@ abstract public class Piece {
 
     protected abstract Set<CoordinatesShift> getPieceMoves();
 
-    private Set<CoordinatesShift> getPieceAttacks() {
+    protected Set<CoordinatesShift> getPieceAttacks() {
         return getPieceMoves();
     }
 
