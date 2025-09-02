@@ -59,7 +59,7 @@ public class Pawn extends Piece {
             int rankSift = Math.abs(this.coordinate.rank - coordinates.rank);
             if (rankSift == 2) {
                 List<Coordinates> between = BoardUtils.getVerticalCoordinatesBetween(this.coordinate, coordinates);
-                return (board.isSquareEmpty(between.get(0)));
+                return (board.isSquareEmpty(between.get(0))) && board.isSquareEmpty(coordinates);
             } else {
                 return board.isSquareEmpty(coordinates);
             }
