@@ -1,5 +1,8 @@
-package com.munir;
+package com.munir.board;
 
+import com.munir.Color;
+import com.munir.Coordinates;
+import com.munir.File;
 import com.munir.piece.Piece;
 
 import java.util.Set;

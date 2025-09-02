@@ -1,5 +1,10 @@
 package com.munir;
 
+import com.munir.board.Board;
+import com.munir.board.BoardConsoleRenderer;
+import com.munir.board.BoardFactory;
+import com.munir.board.Move;
+import com.munir.piece.King;
 import com.munir.piece.Piece;
 
 import java.util.Scanner;
@@ -73,13 +78,34 @@ public class InputCoordinates {
             return input;
         }
     }
-    public static Move inputMove(Board board, Color color, BoardConsoleRenderer renderer){
-        Coordinates sourceCoordinates = InputCoordinates.inputPieceCoordinatesForColor(
-               color, board);
-        Piece piece = board.getPiece(sourceCoordinates);
-        Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
-        renderer.render(board, piece);
-        Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
-        return new Move(sourceCoordinates, targetCoordinates);
+
+    public static Move inputMove(Board board, Color color, BoardConsoleRenderer renderer) {
+
+        while (true) {
+            Coordinates sourceCoordinates = InputCoordinates.inputPieceCoordinatesForColor(
+                    color, board);
+            Piece piece = board.getPiece(sourceCoordinates);
+            Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
+            renderer.render(board, piece);
+            Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
+            Move move = new Move(sourceCoordinates, targetCoordinates);
+            if (validateKingInCheckAfterMove(board, color, move)) {
+                System.out.println("Your king is under attack");
+                continue;
+            }
+            // checkIf KingIn Check after Move (from to)
+
+            return move;
+        }
+    }
+
+    private static boolean validateKingInCheckAfterMove(Board board, Color color, Move move) {
+        //bord copy
+        Board copy = (new BoardFactory()).copy(board);
+        copy.makeMove(move);
+
+        // we trust that there is king the board
+        Piece king = copy.getPieceByColor(color).stream().filter(piece -> piece instanceof King).findFirst().get();
+        return copy.isSquareAttackedByColor(king.coordinate, color.opposite());
     }
 }

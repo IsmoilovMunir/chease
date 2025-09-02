@@ -1,5 +1,8 @@
-package com.munir;
+package com.munir.board;
 
+import com.munir.Color;
+import com.munir.Coordinates;
+import com.munir.File;
 import com.munir.piece.Bishop;
 import com.munir.piece.King;
 import com.munir.piece.Knight;
@@ -14,7 +17,14 @@ import java.util.List;
 import java.util.Set;
 
 public class Board {
-    HashMap<Coordinates, Piece> pieces = new HashMap<>();
+    public final String startingFen;
+    public HashMap<Coordinates, Piece> pieces = new HashMap<>();
+    public List<Move> moves = new ArrayList<>();
+
+    public Board(String startingFen) {
+        this.startingFen = startingFen;
+
+    }
 
     public void setPiece(Coordinates coordinates, Piece piece) {
         piece.coordinate = coordinates;
@@ -25,10 +35,12 @@ public class Board {
         pieces.remove(coordinates);
     }
 
-    public void movePiece(Move move) {
+    public void makeMove(Move move) {
         Piece piece = getPiece(move.from);
         removePiece(move.from);
         setPiece(move.to, piece);
+
+        moves.add(move);
     }
 
     public boolean isSquareEmpty(Coordinates coordinates) {
@@ -73,7 +85,7 @@ public class Board {
     }
 
 
-    private List<Piece> getPieceByColor(Color color) {
+    public List<Piece> getPieceByColor(Color color) {
         List<Piece> result = new ArrayList<>();
         for (Piece piece : pieces.values()) {
             if (piece.color == color) {

@@ -1,4 +1,7 @@
-package com.munir;
+package com.munir.board;
+
+import com.munir.Coordinates;
+import com.munir.File;
 
 import java.util.ArrayList;
 import java.util.List;

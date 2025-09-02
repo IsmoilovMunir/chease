@@ -1,6 +1,6 @@
 package com.munir.piece;
 
-import com.munir.Board;
+import com.munir.board.Board;
 import com.munir.Color;
 import com.munir.Coordinates;
 

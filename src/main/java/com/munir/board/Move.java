@@ -1,4 +1,6 @@
-package com.munir;
+package com.munir.board;
+
+import com.munir.Coordinates;
 
 public class Move {
     public final Coordinates from, to;

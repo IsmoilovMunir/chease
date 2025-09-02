@@ -1,8 +1,8 @@
 package com.munir;
 
-import com.munir.piece.Piece;
-
-import java.util.Set;
+import com.munir.board.Board;
+import com.munir.board.BoardConsoleRenderer;
+import com.munir.board.Move;
 
 public class Game {
     private final Board board;
@@ -26,7 +26,7 @@ public class Game {
             Move move = InputCoordinates.inputMove(board, isWhiteToMove ? Color.WHITE : Color.BLACK, renderer);
             //make move
 
-            board.movePiece(move);
+            board.makeMove(move);
             //pass move
             isWhiteToMove = !isWhiteToMove;
         }

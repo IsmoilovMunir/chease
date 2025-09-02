@@ -1,12 +1,15 @@
-package com.munir;
+package com.munir.board;
 
-import com.munir.piece.Pawn;
+import com.munir.Coordinates;
+import com.munir.File;
+import com.munir.PieceFactory;
 
 public class BoardFactory {
     private PieceFactory pieceFactory = new PieceFactory();
+
     public Board fromFEN(String fen) {
-        //2bqk1nr/1pp2p1p/1n1pb3/8/1N6/3PK3/1PP2P1P/1R1Q1BR1 w k - 0 1
-        Board board = new Board();
+
+        Board board = new Board(fen);
         String[] parts = fen.split(" ");
         String piecePosition = parts[0];
         String[] fenRows = piecePosition.split("/");
@@ -28,5 +31,13 @@ public class BoardFactory {
             }
         }
         return board;
+    }
+
+    public Board copy (Board source){
+        Board clone = fromFEN(source.startingFen);
+        for (Move move : source.moves){
+            clone.makeMove(move);
+        }
+     return clone;
     }
 }
