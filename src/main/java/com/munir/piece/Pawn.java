@@ -3,8 +3,10 @@ package com.munir.piece;
 import com.munir.board.Board;
 import com.munir.Color;
 import com.munir.Coordinates;
+import com.munir.board.BoardUtils;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Pawn extends Piece {
@@ -54,7 +56,13 @@ public class Pawn extends Piece {
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
         if (this.coordinate.file == coordinates.file) {
-            return board.isSquareEmpty(coordinates);
+            int rankSift = Math.abs(this.coordinate.rank - coordinates.rank);
+            if (rankSift == 2) {
+                List<Coordinates> between = BoardUtils.getVerticalCoordinatesBetween(this.coordinate, coordinates);
+                return (board.isSquareEmpty(between.get(0)));
+            } else {
+                return board.isSquareEmpty(coordinates);
+            }
         } else {
             if (board.isSquareEmpty(coordinates)) {
                 return false;
