@@ -4,31 +4,53 @@ import com.munir.board.Board;
 import com.munir.board.BoardConsoleRenderer;
 import com.munir.board.Move;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Game {
     private final Board board;
     private final BoardConsoleRenderer renderer = new BoardConsoleRenderer();
+
+    private final List<GameStateChecker> checkers = List.of(
+            new StalemateGameStateChecker()
+    );
 
     public Game(Board board) {
         this.board = board;
     }
 
     public void gameLoop() {
-        boolean isWhiteToMove = true;
-        while (true) {
+        Color colorToMove = Color.WHITE;
+        GameState state = determineGameState(board, colorToMove);
+        while (state == GameState.ONGOING) {
             //render
             renderer.render(board);
-            if (isWhiteToMove) {
+            if (colorToMove == Color.WHITE) {
                 System.out.println("White to move");
             } else {
                 System.out.println("Black to move");
             }
             //input
-            Move move = InputCoordinates.inputMove(board, isWhiteToMove ? Color.WHITE : Color.BLACK, renderer);
+            Move move = InputCoordinates.inputMove(board, colorToMove, renderer);
             //make move
 
             board.makeMove(move);
             //pass move
-            isWhiteToMove = !isWhiteToMove;
+            colorToMove = colorToMove.opposite();
+            state = determineGameState(board, colorToMove);
+
         }
+        renderer.render(board);
+        System.out.println("Game ended with state = " + state);
+    }
+
+    private GameState determineGameState(Board board, Color color) {
+        for (GameStateChecker checker : checkers) {
+            GameState state = checker.check(board, color);
+            if (state != GameState.ONGOING) {
+                return state;
+            }
+        }
+        return GameState.ONGOING;
     }
 }
