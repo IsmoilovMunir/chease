@@ -25,10 +25,10 @@ public class Board {
         pieces.remove(coordinates);
     }
 
-    public void movePiece(Coordinates from, Coordinates to) {
-        Piece piece = getPiece(from);
-        removePiece(from);
-        setPiece(to, piece);
+    public void movePiece(Move move) {
+        Piece piece = getPiece(move.from);
+        removePiece(move.from);
+        setPiece(move.to, piece);
     }
 
     public boolean isSquareEmpty(Coordinates coordinates) {

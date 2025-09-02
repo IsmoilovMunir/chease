@@ -73,4 +73,13 @@ public class InputCoordinates {
             return input;
         }
     }
+    public static Move inputMove(Board board, Color color, BoardConsoleRenderer renderer){
+        Coordinates sourceCoordinates = InputCoordinates.inputPieceCoordinatesForColor(
+               color, board);
+        Piece piece = board.getPiece(sourceCoordinates);
+        Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
+        renderer.render(board, piece);
+        Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
+        return new Move(sourceCoordinates, targetCoordinates);
+    }
 }
